@@ -22,7 +22,7 @@ class _GifyMainPageState extends State<GifyMainPage> {
   bool isLoading = false;
   bool isLoadingMore = false;
   String errorMessage = '';
-  int currentPage = 0;
+  int currentPage = 0; // Current page number for pagination
   int limit = 25;
   bool hasMoreData = true;
   ScrollController scrollController = ScrollController();
@@ -43,6 +43,7 @@ class _GifyMainPageState extends State<GifyMainPage> {
   }
 
   void _onSearchChanged() {
+    // Debounce search input to avoid frequent API calls
     if (debounce?.isActive ?? false) debounce!.cancel();
     debounce = Timer(const Duration(milliseconds: 500), () {
       if (controller.text.isNotEmpty) {
@@ -52,6 +53,7 @@ class _GifyMainPageState extends State<GifyMainPage> {
   }
 
   void _onScroll() {
+    // Load more data when user scrolls to the bottom
     if (scrollController.position.pixels ==
         scrollController.position.maxScrollExtent) {
       if (!isLoadingMore && hasMoreData) {
@@ -61,6 +63,7 @@ class _GifyMainPageState extends State<GifyMainPage> {
   }
 
   Future<void> getData(String searchText, {bool isPagination = false}) async {
+    // Fetch data from Giphy API
     if (isLoading || isLoadingMore) return;
 
     setState(() {
@@ -86,7 +89,7 @@ class _GifyMainPageState extends State<GifyMainPage> {
         'lang': 'en',
       });
 
-      var res = await http.get(url);
+      var res = await http.get(url); // Make API request
       if (res.statusCode == 200) {
         List<dynamic> newData = jsonDecode(res.body)["data"];
 
@@ -117,6 +120,7 @@ class _GifyMainPageState extends State<GifyMainPage> {
 
   BoxFit _determineBoxFit(
       double gifWidth, double gifHeight, double cardWidth, double cardHeight) {
+    // Determine how the GIF should fit in its container
     double gifAspectRatio = gifWidth / gifHeight;
     double cardAspectRatio = cardWidth / cardHeight;
     return gifAspectRatio > cardAspectRatio ? BoxFit.cover : BoxFit.contain;
@@ -144,7 +148,9 @@ class _GifyMainPageState extends State<GifyMainPage> {
               ],
             ).p12(),
             if (isLoading)
-              const CircularProgressIndicator().centered().p16()
+              const CircularProgressIndicator()
+                  .centered()
+                  .p16() // Show loading indicator
             else if (errorMessage.isNotEmpty)
               errorMessage.text.red500.xl2.makeCentered().p16()
             else
@@ -220,6 +226,7 @@ class _GifyMainPageState extends State<GifyMainPage> {
   }
 
   PreferredSizeWidget _buildAppBar() {
+    // Build app bar based on platform
     if (defaultTargetPlatform == TargetPlatform.iOS) {
       return CupertinoNavigationBar(
         middle: Text('GIPHY App'),
@@ -242,6 +249,7 @@ class _GifyMainPageState extends State<GifyMainPage> {
   }
 
   Widget _buildSearchField() {
+    // Build search field based on platform
     if (defaultTargetPlatform == TargetPlatform.iOS) {
       return CupertinoTextField(
         controller: controller,
@@ -259,6 +267,7 @@ class _GifyMainPageState extends State<GifyMainPage> {
   }
 
   Widget _buildButton() {
+    // Build search button based on platform
     if (defaultTargetPlatform == TargetPlatform.iOS) {
       return CupertinoButton(
         child: Text('Search'),

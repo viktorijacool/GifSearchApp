@@ -28,9 +28,9 @@ class GifDetailsPage extends StatelessWidget {
           'GIF Details',
           style: TextStyle(color: Colors.white), // White title
         ),
-        backgroundColor: Vx.gray900, // AppBar background color
+        backgroundColor: Vx.gray900,
       ),
-      backgroundColor: Vx.gray800, // Background color for the body
+      backgroundColor: Vx.gray800,
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(16.0),

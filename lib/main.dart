@@ -9,6 +9,7 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    // Returns a MaterialApp or CupertinoApp based on the platform
     return Builder(
       builder: (context) {
         final isIOS = Theme.of(context).platform == TargetPlatform.iOS;
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
           title: 'Flutter GIFy',
           debugShowCheckedModeBanner: false,
           theme: isIOS
-              ? null // You can specify Cupertino-themed styles here
+              ? null
               : ThemeData(
                   primarySwatch: Colors.green,
                   visualDensity: VisualDensity.adaptivePlatformDensity,
