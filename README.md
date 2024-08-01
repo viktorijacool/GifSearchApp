@@ -1,16 +1,23 @@
-# gif_search_app
+# GIF Search Application
 
-A new Flutter project.
+Flutter version: 3.22.3
 
-## Getting Started
+## The Task
+Create a gif search application using the Giphy service
 
-This project is a starting point for a Flutter application.
+## Primary Requirements
+### Technical
+- Primary platforms - iOS & Android;
+- Auto search - requests to retrieve GIF information from the service are made automatically with a small delay after a user stops typing;
+- Pagination - loading more results when scrolling;
+- Vertical & horizontal orientation support;
+- Error handling;
+- Unit tests - as much as you see fit;
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### UI
+- Responsive & matching platform guidelines;
+- At least 2 views sourced by data from Giphy;
+- Results are displayed in a grid;
+- Clicking on a grid item should navigate to a detailed GIF view;
+- Loading indicators;
+- Error display;
